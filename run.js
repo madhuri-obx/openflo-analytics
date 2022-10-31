@@ -1,5 +1,6 @@
 const flows = require('./flows')
 const flowNumbers = require('./analytics/overAllFlowNumbers')
+// const flowsOfBranch = require('./analytics/branchWiseNumbers')
 
 let length = flowNumbers.lengthOfFlows(flows.flows)
 console.log("Total Flows  ",length)
@@ -43,5 +44,35 @@ console.log("Number of flows where ast generated is assigned ", length11)
 let length12 = flowNumbers.numberOfAstIsNotGenerated(flows.flows)
 console.log("Number of flows where ast generated is not assigned ", length12)
 
-let length13 = flowNumbers.OpenFlowRentalOffer(flows.flows)
+let length13 = flowNumbers.openFlowRentalOffer(flows.flows)
 console.log("Number of flow of open flow rental offer >5000 ", length13)
+
+let length14 = flowNumbers.isIrpRequired(flows.flows)
+console.log("number of flow of irp required ", length14)
+
+let length15 = flowNumbers.isIrpNotRequired(flows.flows)
+console.log("number of flow of irp not required ", length15)
+
+let length16 = flowNumbers.tenantWaterResponsibility(flows.flows)
+console.log("Number of flow of tenat water responsibility ", length16)
+
+let length17 = flowNumbers.agentWaterResponsibility(flows.flows)
+console.log("Number of flow of tenat water responsibility ", length17)
+
+let length18 = flowNumbers.flowOfFurnishedProperty(flows.flows)
+console.log("Number of flow of furnished property ", length18)
+
+let length19 = flowNumbers.certificates(flows.flows)
+console.log("Number of flow of certificates ", length19) 
+
+let length20 = flowNumbers.aveOfRentalAmount(flows.flows)
+console.log("Average of rental amount per flow ", length20)
+
+let length21 = flowNumbers.aveOfHoldingDeposite(flows.flows)
+console.log("Average of holding deposite ", length21)
+
+let length22 = flowNumbers.aveCertificates(flows.flows)
+console.log("Average of number of certificates per flow ", length22)
+
+let length23 = flowNumbers.aveTenantsPerFlow(flows.flows)
+console.log("Average of tenants per flow ", length23)

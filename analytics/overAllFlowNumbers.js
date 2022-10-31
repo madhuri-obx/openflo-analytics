@@ -40,8 +40,6 @@ function flowsWithTenatsAppUserId(flows) {
     return tenants.length
 }
 
-
-
 function numberOfAstGenerated(flows) {
     let astGenerated = flows.filter(flow =>{
         return flow.is_ast_generated
@@ -98,14 +96,138 @@ function numberOfAstIsNotGenerated(flows) {
     return astNotGenerated.length
 }
 
-function OpenFlowRentalOffer(flow) {
-    let rentalOffer = flow.filter(flow =>{
-        let rentalAmount = flow.open_flow_rental_offer.filter(offer => {
-            return offer.rental_amount >5000
+function openFlowRentalOffer(flows) {
+    let rentalOffer = flows.filter(flow => {
+        if (flow.open_flow_rental_offer) {
+            let rentalAmount = flow.open_flow_rental_offer.rental_amount
+            
+            return rentalAmount > 5000
+        }
+       else{
+            return false;
+        }
         })
-        
-    })
     return rentalOffer.length
+}
+
+function isIrpRequired(flows) {
+let irpRequired = flows.filter(flow => {
+    if (flow.open_flow_rental_offer) {
+        let irpRequired = flow.open_flow_rental_offer.is_irp_required
+        
+        return irpRequired 
+    }
+    else{
+        return false;
+    }
+    })
+return irpRequired.length
+}
+
+function isIrpNotRequired(flows) {
+    let irpRequired = flows.filter(flow => {
+        if (flow.open_flow_rental_offer) {
+            let irpRequired = flow.open_flow_rental_offer.is_irp_required
+            
+            return !irpRequired 
+        }
+        else{
+            return false;
+        }
+        })
+    return irpRequired.length
+    }
+
+function tenantWaterResponsibility(flows){
+    let tenant = flows.filter(flow => {
+        if(flow.open_flow_rental_offer) {
+            let waterResponsibility = flow.open_flow_rental_offer.tenant_water_responsibility
+            return waterResponsibility 
+        }
+        else{
+            return false;
+        }
+        })
+        return tenant.length
+}
+
+function agentWaterResponsibility(flows){
+    let agent = flows.filter(flow => {
+        if(flow.open_flow_rental_offer) {
+            let waterResponsibility = flow.open_flow_rental_offer.tenant_water_responsibility
+            return !waterResponsibility 
+        }
+        else{
+            return false;
+        }
+        })
+        return agent.length
+}
+
+function flowOfFurnishedProperty(flows) {
+    let furnished = flows.filter(flow => {
+        if(flow.open_flow_rental_offer) {
+            let property = flow.open_flow_rental_offer.furnished
+            return property
+        }
+        else {
+            return false
+        }
+    })
+    return furnished.length
+}
+
+function certificates(flows) {
+    let flowCertificates = flows.filter(flow => {
+        return flow.open_flow_certificates.length > 2
+    })
+    return flowCertificates.length 
+}
+
+function aveOfRentalAmount(flows) {
+    let sum = 0;
+    flows.map(flow => {
+        if (flow.open_flow_rental_offer) {
+            let rentalAmount = flow.open_flow_rental_offer.rental_amount
+            sum += rentalAmount
+        }   
+    })
+    let average =  sum / flows.length
+    return average.toFixed(2)
+}
+function aveOfHoldingDeposite(flows) {
+    let sum = 0;
+    let deposites = flows.filter(flow => {
+        if(flow.open_flow_holding_deposit) {
+            let holdingDeposite = flow.open_flow_holding_deposit.holding_desposit_amount
+            return sum += holdingDeposite
+        }
+    })
+    let ave = sum / flows.length
+    return ave.toFixed(3)
+}
+
+function aveCertificates(flows) {
+    let sum =0;
+        let flowCertificates = flows.filter(flow => {
+            if(flow.open_flow_certificates) {
+                let certificates = flow.open_flow_certificates.length
+                return sum += certificates
+            } 
+        })
+        let averageOfCertificates = sum /flows.length
+        return averageOfCertificates.toFixed(2)
+}
+
+function aveTenantsPerFlow(flows) {
+    let sum = 0;
+        let flowOfTenants = flows.filter(flow => {
+            if(flow.tenants) {
+                let tenants = flow.tenants.length
+                return sum +=tenants
+            }
+        })
+        return sum/flows.length
 }
 
 
@@ -124,7 +246,18 @@ module.exports = {
     numberOfEmptyLandlords,
     numberOfAstgenerated,
     numberOfAstIsNotGenerated,
-    OpenFlowRentalOffer
+    openFlowRentalOffer,
+    isIrpRequired,
+    isIrpNotRequired,
+    certificates,
+    tenantWaterResponsibility,
+    agentWaterResponsibility,
+    flowOfFurnishedProperty,
+    aveOfRentalAmount,
+    aveCertificates,
+    aveTenantsPerFlow,
+    aveOfHoldingDeposite
+   
 
 
 }
