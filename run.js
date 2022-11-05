@@ -1,6 +1,5 @@
 const flows = require('./flows')
 const flowNumbers = require('./analytics/overAllFlowNumbers')
-// const flowsOfBranch = require('./analytics/branchWiseNumbers')
 
 let length = flowNumbers.lengthOfFlows(flows.flows)
 console.log("Total Flows  ",length)

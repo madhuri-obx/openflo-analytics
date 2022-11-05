@@ -77,7 +77,7 @@ function numberOfIsAddedToProperty(flows) {
 
 function numberOfEmptyLandlords(flows) {
     let landlords = flows.filter(flow => {
-        return flow.landlord ==0
+        return flow.landlord_id == 0
     })
     return landlords.length
 }
@@ -117,7 +117,7 @@ let irpRequired = flows.filter(flow => {
         
         return irpRequired 
     }
-    else{
+    else {
         return false;
     }
     })
@@ -128,15 +128,14 @@ function isIrpNotRequired(flows) {
     let irpRequired = flows.filter(flow => {
         if (flow.open_flow_rental_offer) {
             let irpRequired = flow.open_flow_rental_offer.is_irp_required
-            
             return !irpRequired 
         }
-        else{
+        else {
             return false;
         }
-        })
+    })
     return irpRequired.length
-    }
+}
 
 function tenantWaterResponsibility(flows){
     let tenant = flows.filter(flow => {
@@ -157,7 +156,7 @@ function agentWaterResponsibility(flows){
             let waterResponsibility = flow.open_flow_rental_offer.tenant_water_responsibility
             return !waterResponsibility 
         }
-        else{
+        else {
             return false;
         }
         })
@@ -166,7 +165,7 @@ function agentWaterResponsibility(flows){
 
 function flowOfFurnishedProperty(flows) {
     let furnished = flows.filter(flow => {
-        if(flow.open_flow_rental_offer) {
+        if (flow.open_flow_rental_offer) {
             let property = flow.open_flow_rental_offer.furnished
             return property
         }
@@ -195,6 +194,7 @@ function aveOfRentalAmount(flows) {
     let average =  sum / flows.length
     return average.toFixed(2)
 }
+
 function aveOfHoldingDeposite(flows) {
     let sum = 0;
     let deposites = flows.filter(flow => {
@@ -215,8 +215,8 @@ function aveCertificates(flows) {
                 return sum += certificates
             } 
         })
-        let averageOfCertificates = sum /flows.length
-        return averageOfCertificates.toFixed(2)
+    let averageOfCertificates = sum /flows.length
+    return averageOfCertificates.toFixed(2)
 }
 
 function aveTenantsPerFlow(flows) {

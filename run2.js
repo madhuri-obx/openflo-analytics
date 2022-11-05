@@ -74,11 +74,14 @@ console.log("Average of number of certificates per flow ", length22)
 let length23 = flowsOfBranch.aveTenantsPerFlow(flows.flows,6)
 console.log("Average of tenants per flow ", length23)
 
-// let length24 = flowsOfBranch.astContractUrl(flows.flows,6)
-// console.log("Array of ast contract url ", length24)
+let length24 = flowsOfBranch.astContractUrl(flows.flows,6)
+console.log("Array of ast contract url ", length24)
 
-let length25 = flowsOfBranch.createdAt(flows.flows,6)
-console.log("flow created in current month ", length25)
+let length25 = flowsOfBranch.nhaContractUrl(flows.flows,6)
+console.log("array of nha contract url ", length25)
 
-let length26 = flowsOfBranch.updatedAt(flows.flows,6)
-console.log("flow updated in current month ", length26)
+let length26 = flowsOfBranch.createdAt(flows.flows,6)
+console.log("flow created in current month ", length26)
+
+let length27 = flowsOfBranch.updatedAt(flows.flows,6)
+console.log("flow updated in current month ", length27)

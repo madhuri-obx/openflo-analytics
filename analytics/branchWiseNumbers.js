@@ -220,35 +220,53 @@ function aveTenantsPerFlow(flows,branch_id) {
         return (sum/flows.length).toFixed(2);
 }
 
-// function astContractUrl(flows,branch_id) {
-//     let astUrl =flows.filter(flow => {
-//         if(flow.ast_contract_url && flow.branch_id == branch_id)
-//         return flow.branch_id == branch_id && flow.ast_contract_url
-//     })
-//     return astUrl.ast_contract_url
-// }
+function astContractUrl(flows,branch_id) {
+    let astUrl =flows.map(flow => {
+        return flow.ast_contract_url
+    })
+    let url = astUrl.filter(url => {
+        return url;
+    })  
+    return url
+}
+
+function nhaContractUrl(flows,branch_id) {
+    let nhaUrl =flows.map(flow => {
+        return flow.nha_contract_url
+    })
+    let url = nhaUrl.filter(url => {
+        return url && flow.branch_id == branch_id;
+    })  
+    return url
+}
 
 function createdAt(flows,branch_id) {
     let monthOfCreated = flows.filter(flow => {
-        let d = flow.createdAt
-        console.log(d)
-        let month = d.getMonth()
-        if(month == 02 && flow.branch_id == branch_id)
-        return date
+        let d = (flow.createdAt)
+        let date = new Date(d)
+        let today = new Date()
+        let currentMonth =today.getMonth()
+        let currentYear = today.getFullYear()
+        let month = date.getMonth()
+        let year = date.getFullYear()
+        return (month == currentMonth && year == currentYear && flow.branch_id == branch_id)
+        
     })
     return monthOfCreated.length
 }
 function updatedAt(flows,branch_id) {
     let monthOfUpdated = flows.filter(flow => {
-        let date = flow.updatedAt
+        let d = flow.updatedAt
+        let date = new Date(d)
+        let today = new Date()
+        let currentMonth = today.getMonth()
+        let currentYear =today.getFullYear()
         let month = date.getMonth()
-        if(month == 10 && flow.branch_id == branch_id)
-        return date
+        let year = date.getFullYear()
+        return (month == currentMonth && year == currentYear && flow.branch_id == branch_id)
     })
-    return monthOfCreated.length
+    return monthOfUpdated.length
 }
-
-
 
 module.exports = {
     lengthOfFlowsOfBranch,
@@ -275,9 +293,8 @@ module.exports = {
     aveCertificates,
     aveTenantsPerFlow,
     aveOfHoldingDeposite,
-    //astContractUrl,
+    astContractUrl,
+    nhaContractUrl,
     createdAt,
     updatedAt
-   
-
 }
